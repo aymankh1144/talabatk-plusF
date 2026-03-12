@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - طلباتك بلس</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'IBM+Plex+Sans+Arabic', sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-50 py-6 sm:py-10 px-4">
+
+<div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+
+    <!-- Login Section -->
+    <div id="loginSection" class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg text-center">
+        <h1 class="text-2xl sm:text-3xl font-bold text-[#ff661c] mb-6">تسجيل الدخول للإدارة</h1>
+        <input type="password" id="adminPassword" placeholder="كلمة المرور..." class="w-full max-w-xs px-5 py-3 border rounded-2xl mb-4 text-center">
+        <br>
+        <button onclick="checkAuth()" class="bg-[#ff661c] text-white px-8 py-3 rounded-2xl font-bold hover:bg-[#ff7a3a] transition-all w-full sm:w-auto">دخول</button>
+    </div>
+
+    <!-- Admin Content (Hidden by default) -->
+    <div id="adminContent" class="hidden space-y-6 sm:space-y-8">
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-zinc-900">إدارة الموقع</h1>
+            <button onclick="logout()" class="text-zinc-400 hover:text-red-500 transition-colors">تسجيل خروج</button>
+        </div>
+
+        <!-- WhatsApp Management -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+            <h2 class="text-xl font-bold text-zinc-700">تغيير رقم الواتساب</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="whatsappNumber" placeholder="963985377283" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateWhatsApp()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ الرقم</button>
+            </div>
+        </div>
+
+        <!-- Video Management -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-6">
+            <h2 class="text-xl font-bold text-zinc-700">إدارة فيديوهات العمل</h2>
+
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="text" id="newVideoUrl" placeholder="رابط يوتيوب أو تيك توك..." class="flex-1 px-5 py-3 border rounded-2xl">
+                    <button onclick="addVideo()" class="bg-green-500 text-white px-6 py-3 rounded-2xl font-bold hover:bg-green-600 transition-all w-full sm:w-auto">+ إضافة فيديو</button>
+                </div>
+                <p class="text-xs text-zinc-400">مثال: https://www.youtube.com/watch?v=XXXXX</p>
+            </div>
+
+            <div id="videosList" class="grid md:grid-cols-2 gap-6">
+                <!-- Videos will appear here -->
+            </div>
+        </div>
+
+        <!-- إدارة الروابط الاجتماعية -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+            <h2 class="text-xl font-bold text-zinc-700">الروابط الاجتماعية</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="facebookUrl" placeholder="رابط فيسبوك" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateFacebook()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ</button>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="instagramUrl" placeholder="رابط إنستغرام" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateInstagram()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ</button>
+            </div>
+        </div>
+
+        <!-- إدارة روابط التحميل -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+            <h2 class="text-xl font-bold text-zinc-700">روابط التحميل</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="appStoreUrl" placeholder="رابط App Store" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateAppStore()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ</button>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="googlePlayUrl" placeholder="رابط Google Play" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateGooglePlay()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ</button>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="apkUrl" placeholder="رابط APK" class="flex-1 px-5 py-3 border rounded-2xl">
+                <button onclick="updateApk()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ</button>
+            </div>
+        </div>
+
+        <!-- إدارة معرفات التلغرام (Chat IDs) -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+            <h2 class="text-xl font-bold text-zinc-700">معرفات الدردشات (Telegram Chat IDs)</h2>
+            <p class="text-sm text-zinc-500">أدخل كل معرف في سطر منفصل</p>
+            <textarea id="telegramChatIds" rows="3" placeholder="2024001342
+1927352258
+-1003849324453" class="w-full px-5 py-3 border rounded-2xl font-mono text-sm"></textarea>
+            <button onclick="updateTelegramChatIds()" class="bg-[#ff661c] text-white px-6 py-3 rounded-2xl font-bold w-full sm:w-auto">حفظ المعرفات</button>
+        </div>
+
+        <!-- توكن البوت محذوف من الواجهة لأسباب أمنية -->
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>

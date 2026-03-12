@@ -1,0 +1,254 @@
+/* ============================================
+   index.css - طلباتك بلس - الصفحة الرئيسية
+   ============================================ */
+
+/* 1. استيراد الخطوط وتعريف المتغيرات */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #ff661c;
+    --secondary: #4458a8;
+}
+
+/* 2. التنسيق العام للجسم */
+body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background-color: #f4f4f5;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+/* 3. تنسيق قسم الـ Hero (تدرج لوني مع نقش خلفية) */
+.hero-bg {
+    position: relative;
+    background: linear-gradient(135deg, #FFFFFF, #4458a8 35%);
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.hero-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663283773943/B6VScFZzyyFsbsNTibkNXq/delivery-benefits-pattern-kLL7PjAxESmg8sQjNQs3GU.webp');
+    background-repeat: repeat;
+    background-size: 400px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. تنسيق شريط الصور المتحرك (Ticker) */
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ticker-track {
+    display: flex;
+    animation: marquee 25s linear infinite;
+}
+
+.ticker-track img {
+    border: 2px solid var(--primary);
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ticker-track img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(255, 102, 28, 0.3);
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+}
+
+.ticker-track-reverse {
+    animation-direction: reverse;
+}
+
+/* 5. بطاقات المميزات (Feature Cards) */
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 3rem auto;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, #4458a8 0%, #4458a8 30%, #ff661c 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.feature-icon-svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+    fill: white;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-icon-svg {
+    transform: rotate(-10deg);
+}
+
+.feature-card h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+}
+
+.feature-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 6. بطاقات الخطوات (Step Cards) */
+.step-card {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.step-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    padding: 2px;
+    background: transparent;
+    transition: all 0.3s ease;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+}
+
+.step-card:hover::before {
+    background: linear-gradient(to bottom, #ff661c, #4458a8);
+}
+
+.step-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(68, 88, 168, 0.25);
+    border-color: var(--secondary);
+}
+
+.step-card:hover + .step-number,
+.flex:hover .step-number {
+    background-color: var(--secondary) !important;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.step-card:hover h3 {
+    color: var(--secondary);
+    transition: color 0.3s ease;
+}
+
+.step-card h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.step-card p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+/* زر السجل */
+.btn-step-style {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-register-style {
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.btn-register-style:hover {
+    background-color: var(--secondary) !important;
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(68, 88, 168, 0.25);
+    border-color: var(--primary);
+}
+
+/* أرقام الخطوات */
+.step-number {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: -1.75rem;
+    position: relative;
+    z-index: 10;
+    border: 4px solid white;
+}
+
+/* 7. تأثيرات الظهور (Fade-in) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

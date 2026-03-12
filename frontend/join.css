@@ -1,0 +1,28 @@
+/* ============================================
+   join.css - طلباتك بلس - صفحة تسجيل السائق
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap');
+
+:root {
+    --primary: #ff661c;
+    --secondary: #4458a8;
+}
+
+body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background-color: #f4f4f5;
+}
+
+.form-container {
+    background: white;
+    border-radius: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 102, 28, 0.1);
+}
